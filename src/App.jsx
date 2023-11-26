@@ -1,6 +1,7 @@
 //import './App.css'
 import Count from './components/Count';
 import Profile from './components/Profile';
+import TestRouting from './components/TestRouting';
 
 const data_array = [
         {userName : 'Vimukthi', email : 'vimu@gmail.com', city : 'Colombo', isActive :true },
@@ -18,6 +19,7 @@ function App() {
     ))}
        
       <Count/>
+      <TestRouting/>
 
     </>
   );
