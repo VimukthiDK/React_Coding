@@ -11,13 +11,22 @@ import { getBlogPost } from "./pages/Api";
 function App() {
 
   const [data,setData] = useState("");
+  const [error,setError] = useState("");
 
   useEffect(() => {
 
     async function getData() {
-      const _res = await getBlogPost();
-      setData(_res.data);
+      try {
+        
+        const _res = await getBlogPost();
+        setData(_res.data);
 
+      } catch (error) {
+        
+        setError(error.message);
+        console.log(error);
+      }
+      
     }
     getData();
 
@@ -27,6 +36,7 @@ function App() {
     return (
     <>
     <h1> {data.titlel} </h1>
+    <h3> {error} </h3>
     <p>{data.body}</p>
     </>
   );
