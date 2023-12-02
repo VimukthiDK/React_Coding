@@ -6,10 +6,12 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { getBlogPost } from "./pages/Api";
+import { createBlogPost, getBlogPost } from "./pages/Api";
 
 function App() {
 
+  // Use API for get method
+  /*----------------------------------------------------- 
   const [data,setData] = useState("");
   const [error,setError] = useState("");
 
@@ -30,14 +32,43 @@ function App() {
     }
     getData();
 
-  }, [] );
+  }, [] ); */
+
+
+
+  const [msg,setMsg] = useState("");
+  const [error,setError] = useState("");
+  const [loading,setLoading] = useState(false);
+  
+
+  async function handleCreatePost(){
+
+    try {
+
+      setLoading(true);
+      const _res = await createBlogPost({
+          title : "Test 01",
+          body : "This is a body...",
+          userId : 10,
+
+      });
+      setLoading(false);
+      setMsg("Succefully Created...! ")
+      console.log(_res);
+      
+    } catch (error) {
+      setError("Not Created ....! ")
+    }
+      
+    }
 
    
     return (
     <>
-    <h1> {data.titlel} </h1>
-    <h3> {error} </h3>
-    <p>{data.body}</p>
+      <h1> Create Blog Post </h1>
+      <h4 style={{color:"red"}}> {error} </h4>
+      <h4 style={{color:"green"}}> {loading ? "Loading ...! " : msg} </h4>
+      <button onClick={handleCreatePost}> Create Button </button>
     </>
   );
 }
